@@ -1,11 +1,151 @@
 <html>
   <head>
-    <style></style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: #2e5077;
+        padding: 0;
+        margin: 0;
+      }
 
-    <script></script>
+      * {
+        font-family: "Libre Franklin", serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      button {
+        background-color: #4da1a9;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        position: fixed;
+        left: 50%;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.4);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+
+      #yes {
+        color: #fff;
+        font-weight: bold;
+        top: 35%;
+        animation: pulse 1.5s infinite;
+      }
+
+      #no {
+        background-color: #f6f4f0;
+        top: 45%;
+        transition: 0.3s;
+        z-index: 100;
+        border: 1px solid #000;
+      }
+
+      span {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      #question {
+        transform: translate(-50%, -50%);
+        position: fixed;
+        top: 15%;
+        left: 50%;
+      }
+
+      #hint {
+        transform: translate(-50%, -50%);
+        position: fixed;
+        top: 70%;
+        left: 50%;
+        opacity: 0;
+      }
+
+      #success {
+        opacity: 0;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        top: 50%;
+      }
+    </style>
+
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const yesBtn = document.getElementById("yes");
+        const main = document.getElementById("main");
+        const success = document.getElementById("success");
+        yesBtn.addEventListener("click", () => {
+          main.style.opacity = 0;
+          success.style.opacity = 1;
+        });
+
+        const noBtn = document.getElementById("no");
+        const hintSpan = document.getElementById("hint");
+        const hints = [
+          "Oops! Acho que você selecionou a opção errada hehe 🤭",
+          "Thais confiante da sua decisão? 🤔",
+          "Thais certa de que você não quer me mostrar as capivaras de brusque? 😮",
+          "Thais com plena certeza de que não queres ouvir piadinhas de tiozão? 🤪",
+          "Thais quebrando a sua promessa de me mostrar as capivaras!! 🤬",
+          "Parece que Thais selecionando 'Não' por acidente. Tente novamente! 😅",
+        ];
+
+        let hintIndex = 0;
+
+        noBtn.addEventListener("click", () => {
+          const randomX = Math.floor(Math.random() * 200);
+          const randomY = Math.floor(Math.random() * 200);
+          noBtn.style.transform = `translate(${randomX - 100}px, ${
+            randomY - 100
+          }px)`;
+          const hint = hints[hintIndex % hints.length];
+          hintIndex = hintIndex + 1;
+          hintSpan.innerHTML = hint;
+          hintSpan.style.opacity = 1;
+        });
+      });
+    </script>
   </head>
 
   <body>
-    HELLO
+    <div id="main">
+      <span id="question"
+        >Thais, você aceita sair comigo no dia 15/02/2025? 😍</span
+      >
+      <button id="yes">SIM!!!</button>
+      <button id="no">Não</button>
+
+      <span id="hint">Hintt</span>
+    </div>
+    <span id="success">
+      UHUUUUU!!! 🎉🎉🎉<br /><br />
+      Prometo que não vão faltar piadocas de tiozão e tempo de qualidade!
+      <br />Thais animada? ❤️
+    </span>
   </body>
 </html>
